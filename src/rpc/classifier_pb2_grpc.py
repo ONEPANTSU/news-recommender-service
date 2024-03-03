@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import classifier_pb2 as classifier__pb2
+import src.rpc.classifier_pb2 as classifier__pb2
 
 
 class NewsClassifierStub(object):
