@@ -1,4 +1,4 @@
-# 🕵️ News Recommender Agent
+# 📰 News Recommender Service
 
 ## 📖 Description:
 The REST API for getting filtered news by category. It parses a news-site and sends gRPC requests to the [**news-classifier-service**](https://github.com/ONEPANTSU/news-classifier-service) for texts classifying.

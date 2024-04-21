@@ -1,5 +1,5 @@
 from enum import Enum
 
 
-class Parsers(str, Enum):
+class Parsers(Enum):
     LENTA = "lenta.ru"

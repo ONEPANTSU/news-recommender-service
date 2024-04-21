@@ -4,7 +4,7 @@ services:
     agent:
         build: .
         restart: always
-        container_name: agent
+        container_name: recommender_service
         ports:
             - "8000:8000"
         env_file:

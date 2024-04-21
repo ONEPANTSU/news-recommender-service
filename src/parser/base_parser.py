@@ -1,4 +1,6 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
+
+from src.dto import News
 
 
 class BaseParser(ABC):
@@ -15,5 +17,5 @@ class BaseParser(ABC):
         return news[:news_limit]
 
     @abstractmethod
-    def _get_news_from_page(self, page) -> list[str]:
+    def _get_news_from_page(self, page) -> list[News]:
         pass
