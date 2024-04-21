@@ -1,10 +1,10 @@
 import grpc
 
-from src.categories import Categories
+from src.categories import Category
 from src.config import CLASSIFIER_HOST, CLASSIFIER_PORT
 from src.dto import News
 from src.parser.lenta_parser import LentaParser
-from src.parser.parsers import Parsers
+from src.parser.parser_type import ParserType
 from src.rpc import *
 
 
@@ -12,11 +12,13 @@ class RecommenderService:
     def __init__(self):
         self.__classifier_addr = f"{CLASSIFIER_HOST}:{CLASSIFIER_PORT}"
         self.parsers = {
-            Parsers.LENTA: LentaParser(),
+            ParserType.LENTA: LentaParser(),
         }
 
     async def get_news(
-        self, categories: set[Categories], parser: Parsers = Parsers.LENTA
+        self,
+        categories: set[Category],
+        parser: ParserType = ParserType.LENTA
     ):
         all_news = self.parsers[parser].get_news()
         if categories:
@@ -33,7 +35,7 @@ class RecommenderService:
             all_news = self.__sort_news_by_jaccard(news)
         return all_news
 
-    async def __classify_news(self, text: str) -> set[Categories]:
+    async def __classify_news(self, text: str) -> set[Category]:
         async with grpc.aio.insecure_channel(
             self.__classifier_addr
         ) as channel:
@@ -47,7 +49,8 @@ class RecommenderService:
 
     @staticmethod
     def __get_jaccard_index(
-        preferred_categories: set[str], news_categories: set[str]
+        preferred_categories: set[Category],
+        news_categories: set[Category]
     ) -> float:
         intersection = len(preferred_categories.intersection(news_categories))
         union = len(preferred_categories.union(news_categories))

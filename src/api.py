@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Query
 
-from src.categories import Categories
+from src.categories import Category
 from src.dto import News
-from src.parser.parsers import Parsers
+from src.parser.parser_type import ParserType
 from src.service import RecommenderService
 
 
@@ -19,11 +19,11 @@ class RecommenderAPI(FastAPI):
 
     async def get_news(
         self,
-        parser: Parsers,
-        categories: set[Categories] = Query(default_factory=set),
+        parser: ParserType,
+        categories: set[Category] = Query(default_factory=set),
     ) -> list[News]:
         return await self.service.get_news(
-            categories=set(categories), parser=parser
+            categories=categories, parser=parser
         )
 
 

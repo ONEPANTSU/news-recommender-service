@@ -4,7 +4,10 @@ from src.dto import News
 
 
 class BaseParser(ABC):
-    def get_news(self, page_offset=1, news_limit=100):
+    _BASE_URL: str
+    _SEARCH_URL: str
+
+    def get_news(self, page_offset=1, news_limit=100) -> list[News]:
         current_page = page_offset
         news = []
         try:

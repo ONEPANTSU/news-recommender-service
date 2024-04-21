@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Categories(str, Enum):
+class Category(str, Enum):
     CRIME = "Криминал"
     CULTURE = "Культура"
     ECONOMY = "Экономика"
